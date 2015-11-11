@@ -65,7 +65,7 @@ problem for getting libzip loaded.  If this is your story, I empathize, and enco
 do the following.
 
 1. Grab the source for libzip from http://www.nih.at/libzip/ and extract it somewhere.
-2. Build libzip from its source root (./configure && make)
-3. Copy libz.a to the jfind build directory (cp lib/.libs/libzip.a ~/path/to/jfind/)
-4. Build jfind from its source root: make clean; make semi-static
+2. Build libzip from its source root (```./configure && make```)
+3. Copy libz.a to the jfind build directory (```cp lib/.libs/libzip.a ~/path/to/jfind/```)
+4. Build jfind from its source root: ```make clean; make semi-static```
 
