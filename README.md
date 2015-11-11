@@ -8,8 +8,8 @@ and I figured this might be useful, so here it is.
 
 usage: jfind path resource-name
 
-The resource-name can be a full package/class name, such as org.sl4j.Logger, or can include
-wildcards, such as 'org.sl4j.*' or '*.Logger'.
+The resource-name can be a full package/class name, such as org.slf4j.Logger, or can include
+wildcards, such as 'org.slf4j.\*' or '\*.Logger'.
 
 When jfind encounters a jar, war, or ear, it will decompress it (and compressed contents)
 to a temporary location and continue the search.
@@ -25,10 +25,10 @@ leading to classpath and versioning problems:
 $ jfind Middleware/wlserver org.slf4j.Logger
 
 To determine if a war contains any Apache dependencies:
-$ jfind mywar.war 'org.apache.*'
+$ jfind mywar.war 'org.apache.\*'
 
 To find a class that I've forgotten the package name of:
-$  jfind . '*.MyClass'
+$  jfind . '\*.MyClass'
 
 ## Required Libraries
 
