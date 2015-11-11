@@ -6,10 +6,10 @@ and I figured this might be useful, so here it is.
 
 ## Usage
 
-usage: jfind <path> <package/class>
+usage: jfind path resource-name
 
-The package/class can be a full package/class name, such as org.sl4j.Logger, or can include
-wildcards, such as 'org.sl4j.*'.
+The resource-name can be a full package/class name, such as org.sl4j.Logger, or can include
+wildcards, such as 'org.sl4j.*' or '*.Logger'.
 
 When jfind encounters a jar, war, or ear, it will decompress it (and compressed contents)
 to a temporary location and continue the search.
