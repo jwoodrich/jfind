@@ -4,6 +4,8 @@ Find utility for java classes.  Currently works for files compiled with Java 6 c
 I would like to add compatibility up through 8 (and some other features), but haven't had time, 
 and I figured this might be useful, so here it is.
 
+Created by: Jason D. Woodrich
+
 ## Usage
 
 usage: jfind path resource-name
