@@ -3,7 +3,7 @@
 
 #define CALLOC(N,I,S) calloc_or_die(N, I, S)
 #ifdef DEBUG
-#define DEBUGOUT(S,...) printf(S,__VA_ARGS__)
+#define DEBUGOUT(S,...) printf(S,##__VA_ARGS__)
 #else
 #define DEBUGOUT(S,...)
 #endif

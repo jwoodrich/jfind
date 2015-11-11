@@ -42,7 +42,7 @@ int process(char *pathlabel, char *searchstring, char *path) {
   if (subpath=strchr(path,'!')) {
     int basesize=(int)(subpath-path);
     if (!(base=malloc(subpath-path))) {
-      fprintf(stderr,"unable to malloc %d bytes for base path of %s\n",subpath-path,path);
+      fprintf(stderr,"unable to malloc %ld bytes for base path of %s\n",subpath-path,path);
       exit(2);
     }
     strncpy(base,path,basesize);
@@ -112,9 +112,9 @@ int process(char *pathlabel, char *searchstring, char *path) {
             int err;
             if ((za = zip_open(base, 0, &err)) == NULL) {
               zip_error_to_str(error_buf, sizeof(error_buf), err, errno);
-              fprintf(stderr, "%s: can't open zip archive `%s': %s/n", base, error_buf);
+              fprintf(stderr, "can't open zip archive `%s': %s/%d", base, error_buf, errno);
             } else {
-              char tmpdir[L_tmpnam];
+              char tmpdir[L_tmpnam]="/tmp/jfindXXXXXX";
               if (unzip_tmp(&tmpdir,za)) {
                 char *newpath;
                 int newpath_size;
@@ -163,12 +163,8 @@ int unzip_tmp(char *tmpdir,struct zip *za) {
   char *fpath=CALLOC("temporary zip file path",bufsize,sizeof(char));
   char buf[100];
   
-  if (tmpnam(tmpdir)==NULL) {
+  if (mkdtemp(tmpdir)==NULL) {
     fprintf(stderr,"unable to generate temporary directory name!\n");
-    return 0;
-  }
-  if (mkdir(tmpdir,0700)<0) {
-    fprintf(stderr,"unable to create temporary directory %s!\n",tmpdir);
     return 0;
   }
   entries=zip_get_num_entries(za, 0); 
@@ -187,7 +183,7 @@ int unzip_tmp(char *tmpdir,struct zip *za) {
       } else {
         DEBUGOUT("- unzip creating file %s\n",fpath);
         if (!(zf=zip_fopen_index(za,i,0))) {
-          fprintf(stderr,"unable to open file %s in zip at index %d!\n",&sb.name,i);
+          fprintf(stderr,"unable to open file %s in zip at index %d!\n",sb.name,i);
         } else if ((fd=open(fpath,O_RDWR | O_TRUNC | O_CREAT, 0600))<0) {
           fprintf(stderr,"unable to open file %s for writing!\n",fpath);
         } else {
@@ -219,7 +215,7 @@ char *format_search(char *searchstring) {
   char* ret=strdup(searchstring);
   int i;
   if (ret==(char*)NULL) { return ret; }
-  for (i=0;searchstring[i]!=(char)NULL;i++) { 
+  for (i=0;searchstring[i]!='\0';i++) { 
     ret[i]=searchstring[i]!='.'?searchstring[i]:'/';
   }
   return ret;

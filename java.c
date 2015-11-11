@@ -3,6 +3,7 @@
 #include "util.h"
 #include <stdlib.h>
 #include <errno.h>
+#include <string.h>
 #define RORZ(X,...) if (!X) { __VA_ARGS__ return 0; }
 #define LEFT_MASK1 0x80
 #define LEFT_MASK2 0xc0
@@ -84,8 +85,8 @@ char *jutf8_strncpy(char *dest, u2 length, u1 *source, int cslen) {
     }
   }
   // add null terminator
-  if (di<cslen) { dest[di]=(char)NULL; }
-  else { dest[cslen-1]=(char)NULL; }
+  if (di<cslen) { dest[di]='\0'; }
+  else { dest[cslen-1]='\0'; }
 
   return dest;
 }
@@ -121,7 +122,6 @@ int read_class_summary(FILE *fp, struct class_summary *clazz) {
   }
   constant_pool_count--;
   cp=CALLOC("read_class_summary cp_info",constant_pool_count,sizeof(struct cp_info *));
-  printf("\n---\n");
   DEBUGOUT("- version is %d.%d\n",clazz->major_version,clazz->minor_version);
 
   for (i=0;i<constant_pool_count;i++) {
@@ -247,11 +247,11 @@ int read_cp_info(FILE *fp, char *filename, struct cp_info *cp) {
       }
 #ifdef DEBUG
       tmp=jutf8_strdup(max,((struct CONSTANT_Utf8_info *)cp->info)->bytes);
-      DEBUGOUT("----> value=",NULL);
+      DEBUGOUT("----> value=");
       if (tmp!=NULL) {
         DEBUGOUT("\"%s\"\n",tmp);
       } else {
-        DEBUGOUT("null\n",NULL);
+        DEBUGOUT("null\n");
       }
       free(tmp);
 #endif
