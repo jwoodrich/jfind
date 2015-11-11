@@ -36,7 +36,8 @@ To find a class that I've forgotten the package name of:
 
 ### RHEL/CentOS based
 The following packages should be installed on the build system: gcc, make, zlib-devel, libzip-devel
-Systems that run jfind will require zlib and libzip.
+Systems that run jfind will require zlib and libzip, though doing a static build can eliminate
+the need for libzip (see section on static linking).
 
 ### Debian based
 The following packages should be installed on the build system: build-essentials, libzip, libzip-dev, 
@@ -56,7 +57,7 @@ Instructions for both are provided.
 
 ```make clean; make static-deb```
 
-Static linking on other systems:
+### Static linking on other systems:
 
 It seems most system have libz.so by default, so there isn't much need to statically link that.
 libzip is another story, and as previously mentioned, non-technical restrictions can impose a
