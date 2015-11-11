@@ -24,13 +24,13 @@ with the hope that it would be faster than the shell scripts I used previously.
 To find if/where SLF4J was distributed as part of a popular application server, potentially 
 leading to classpath and versioning problems:
 
-$ jfind Middleware/wlserver org.slf4j.Logger
+```$ jfind Middleware/wlserver org.slf4j.Logger```
 
 To determine if a war contains any Apache dependencies:
-$ jfind mywar.war 'org.apache.\*'
+```$ jfind mywar.war 'org.apache.\*'```
 
 To find a class that I've forgotten the package name of:
-$  jfind . '\*.MyClass'
+```$  jfind . '\*.MyClass'```
 
 ## Required Libraries
 
@@ -50,11 +50,11 @@ Instructions for both are provided.
 
 ### Dynamic linking:
 
-make clean; make
+```make clean; make```
 
 ### Static linking on Debian based systems:
 
-make clean; make static-deb
+```make clean; make static-deb```
 
 Static linking on other systems:
 
@@ -63,8 +63,8 @@ libzip is another story, and as previously mentioned, non-technical restrictions
 problem for getting libzip loaded.  If this is your story, I empathize, and encourage you to
 do the following.
 
-Grab the source for libzip from http://www.nih.at/libzip/ and extract it somewhere.
-Build libzip from its source root (./configure && make)
-Copy libz.a to the jfind build directory (cp lib/.libs/libzip.a ~/path/to/jfind/)
-Build jfind from its source root: make clean; make semi-static
+1. Grab the source for libzip from http://www.nih.at/libzip/ and extract it somewhere.
+2. Build libzip from its source root (./configure && make)
+3. Copy libz.a to the jfind build directory (cp lib/.libs/libzip.a ~/path/to/jfind/)
+4. Build jfind from its source root: make clean; make semi-static
 
